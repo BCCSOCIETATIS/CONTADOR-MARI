@@ -5,28 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ojitos Dindos 🤍</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
-
-    html,body { height: 100%; }
-
-    /* Contenedor principal (móvil) */
-    .app {
-      background-color: #ffffff;
-      color: #002b5b;
-      display: none; /* visible solo en móvil via media query */
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-      overflow-x: hidden;
-      text-align: center;
-      position: relative;
-      padding-bottom: 150px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
     }
 
-    h1 { font-size: 1.6em; color: #002b5b; margin: 25px 0; }
+    body {
+      background-color: #ffffff;
+      color: #002b5b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+      position: relative;
+    }
 
-    .countdown { display: flex; gap: 15px; justify-content: center; margin-bottom: 30px; flex-wrap: wrap; }
+    h1 {
+      font-size: 1.6em;
+      color: #002b5b;
+      margin-bottom: 25px;
+    }
+
+    .countdown {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
     .time-box {
       background: #fff8e1;
       border: 2px solid #f1c40f;
@@ -34,25 +46,50 @@
       padding: 15px 25px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    .time-box div { font-size: 2em; font-weight: bold; color: #002b5b; }
-    .time-box span { display: block; margin-top: 5px; font-size: 0.9em; color: #a67c00; }
 
-    .mini-countdown { display: flex; gap: 10px; justify-content: center; transform: scale(0.8); opacity: 0.9; margin-top: 10px; }
-    .mini-countdown .time-box { padding: 10px 18px; border: 1.5px solid #f1c40f; }
+    .time-box div {
+      font-size: 2em;
+      font-weight: bold;
+      color: #002b5b;
+    }
 
-    h3 { color: #a67c00; margin-bottom: 8px; font-size: 1em; }
+    .time-box span {
+      display: block;
+      margin-top: 5px;
+      font-size: 0.9em;
+      color: #a67c00;
+    }
+
+    /* Mini contador */
+    .mini-countdown {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      transform: scale(0.8);
+      opacity: 0.9;
+      margin-top: 10px;
+    }
+
+    .mini-countdown .time-box {
+      padding: 10px 18px;
+      border: 1.5px solid #f1c40f;
+    }
+
+    h3 {
+      color: #a67c00;
+      margin-bottom: 8px;
+      font-size: 1em;
+    }
 
     footer {
       position: absolute;
       bottom: 25px;
-      left: 0;
-      right: 0;
-      text-align: center;
       font-size: 1.3em;
       font-weight: 600;
       color: #002b5b;
       animation: glow 3s infinite ease-in-out;
     }
+
     @keyframes glow {
       0% { color: #002b5b; text-shadow: 0 0 8px rgba(241,196,15,0.4); }
       50% { color: #f1c40f; text-shadow: 0 0 15px rgba(241,196,15,0.8); }
@@ -66,78 +103,85 @@
       font-size: 18px;
       opacity: 0.8;
       animation: floatUp 6s linear infinite;
-      pointer-events: none;
-      user-select: none;
     }
+
     @keyframes floatUp {
       0% { transform: translateY(100vh) scale(1); opacity: 0.8; }
       100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
     }
 
-    /* Caja de preguntas */
-    .question-box {
-      margin-top: 30px;
-      background: #fff8e1;
-      border: 2px solid #f1c40f;
-      border-radius: 15px;
-      padding: 16px;
-      width: 85%;
-      max-width: 360px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .question { font-size: 1.05em; color: #002b5b; margin-bottom: 12px; }
-    .options { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
-    .options button {
-      background-color: #002b5b; color: white; border: none; border-radius: 10px; padding: 8px 14px;
-      cursor: pointer; transition: all .18s; font-weight: 500;
-    }
-    .options button:hover { background-color: #f1c40f; color: #002b5b; }
-
-    .final-message { display: none; font-size: 1.05em; color: #002b5b; font-weight: 600; margin-top: 12px; }
-
-    /* Mensaje para desktop */
-    .desktop-message {
-      display: flex; /* visible solo en escritorio via media query */
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 12px;
-      min-height: 100vh;
-      text-align: center;
-      padding: 20px;
-      background: linear-gradient(180deg, #002b5b 0%, #001735 100%);
-      color: white;
-    }
-    .desktop-message h2 { font-size: 1.6rem; }
-    .desktop-message p { color: #f1c40f; font-weight: 600; }
-
-    /* -------- Responsiveness -------- */
-    /* Mobile: show app, hide desktop-msg */
-    @media (max-width: 599px) {
-      .app { display: flex; }
-      .desktop-message { display: none; }
+    /* Imagen flotante */
+    .floating-img {
+      position: absolute;
+      width: 90px;
+      opacity: 0.85;
+      animation: floatImg 8s linear infinite;
+      z-index: 0;
     }
 
-    /* Desktop/tablet: show desktop-msg, hide app (so only desktop sees the notice) */
+    @keyframes floatImg {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.9; }
+      100% { transform: translateY(-10vh) rotate(20deg); opacity: 0; }
+    }
+
+    /* Mensaje después del segundo sí */
+    .mensaje-final {
+      font-size: 1.4em;
+      color: #002b5b;
+      text-shadow: 0 0 8px rgba(241,196,15,0.5);
+      margin-top: 25px;
+      display: none;
+      animation: fadeIn 2s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Preguntas */
+    .pregunta {
+      margin-top: 25px;
+      font-size: 1.1em;
+    }
+
+    button {
+      margin: 10px;
+      padding: 8px 15px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      background-color: #f1c40f;
+      color: #002b5b;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      background-color: #002b5b;
+      color: #fff8e1;
+    }
+
+    /* Ocultar en PC */
     @media (min-width: 600px) {
-      .app { display: none; }
-      .desktop-message { display: flex; }
+      body > *:not(.soloMovil) {
+        display: none;
+      }
+      body::after {
+        content: "💻 Esta página solo está hecha para ver desde un celular 💖";
+        color: #002b5b;
+        font-size: 1.4em;
+        text-align: center;
+        display: block;
+        margin-top: 40vh;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- Mensaje que se ve SOLO en computadoras/tablets -->
-  <div class="desktop-message" aria-hidden="true">
-    <h2>Solo disponible en dispositivos móviles 📱</h2>
-    <p>Abre esta página desde tu teléfono para ver la sorpresa.</p>
-  </div>
-
-  <!-- Contenido principal (solo móvil) -->
-  <main class="app" id="app">
+  <div class="soloMovil">
     <h1>Ojitos Dindos 🤍</h1>
 
-    <!-- Contador principal -->
     <div class="countdown" id="countdown">
       <div class="time-box"><div id="days">00</div><span>Días</span></div>
       <div class="time-box"><div id="hours">00</div><span>Horas</span></div>
@@ -146,8 +190,6 @@
     </div>
 
     <h3>22 de noviembre</h3>
-
-    <!-- Mini contador -->
     <div class="mini-countdown" id="miniCountdown">
       <div class="time-box"><div id="miniDays">00</div><span>Días</span></div>
       <div class="time-box"><div id="miniHours">00</div><span>Horas</span></div>
@@ -155,85 +197,78 @@
       <div class="time-box"><div id="miniSeconds">00</div><span>Segundos</span></div>
     </div>
 
-    <!-- Caja de preguntas -->
-    <div class="question-box" id="questionBox" aria-live="polite">
-      <div class="question" id="questionText">¿Eres Mari?</div>
-      <div class="options">
-        <button onclick="answer('si')">Sí</button>
-        <button onclick="answer('no')">No</button>
-        <button onclick="answer('no soy')">No soy</button>
-      </div>
-      <div class="final-message" id="finalMessage">Te amo princesa, vuelve ya que te extraño 🤍</div>
+    <div class="pregunta" id="pregunta">
+      <p>¿Eres Mari?</p>
+      <button onclick="respuesta('si')">Sí</button>
+      <button onclick="respuesta('no')">No</button>
     </div>
 
+    <div class="mensaje-final" id="mensajeFinal">Te amo princesa, te extraño mucho 🤍</div>
+
     <footer>Te amo 🤍</footer>
-  </main>
+  </div>
 
   <script>
-    // Fechas (hora de Cali -05:00)
+    // Contadores
     const eventDate = new Date("2025-11-23T17:00:00-05:00").getTime();
     const miniEventDate = new Date("2025-11-22T17:00:00-05:00").getTime();
 
-    // Actualiza ambos contadores
-    function updateCounters() {
-      const now = Date.now();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const updateCountdown = (distance, ids) => {
+        const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((distance % (1000 * 60)) / 1000);
+        document.getElementById(ids[0]).innerText = d.toString().padStart(2, '0');
+        document.getElementById(ids[1]).innerText = h.toString().padStart(2, '0');
+        document.getElementById(ids[2]).innerText = m.toString().padStart(2, '0');
+        document.getElementById(ids[3]).innerText = s.toString().padStart(2, '0');
+      };
+      updateCountdown(eventDate - now, ['days','hours','minutes','seconds']);
+      updateCountdown(miniEventDate - now, ['miniDays','miniHours','miniMinutes','miniSeconds']);
+    }, 1000);
 
-      function fill(targetIds, targetTime) {
-        const distance = targetTime - now;
-        const days = Math.floor(distance / (1000*60*60*24));
-        const hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
-        const minutes = Math.floor((distance % (1000*60*60))/(1000*60));
-        const seconds = Math.floor((distance % (1000*60))/1000);
+    // Preguntas interactivas
+    let paso = 0;
+    function respuesta(resp) {
+      const pregunta = document.getElementById('pregunta');
+      const mensajeFinal = document.getElementById('mensajeFinal');
 
-        document.getElementById(targetIds.days).innerText = (isFinite(days) ? String(Math.max(0,days)).padStart(2,'0') : '--');
-        document.getElementById(targetIds.hours).innerText = (isFinite(hours) ? String(Math.max(0,hours)).padStart(2,'0') : '--');
-        document.getElementById(targetIds.minutes).innerText = (isFinite(minutes) ? String(Math.max(0,minutes)).padStart(2,'0') : '--');
-        document.getElementById(targetIds.seconds).innerText = (isFinite(seconds) ? String(Math.max(0,seconds)).padStart(2,'0') : '--');
-      }
-
-      fill({days:'days', hours:'hours', minutes:'minutes', seconds:'seconds'}, eventDate);
-      fill({days:'miniDays', hours:'miniHours', minutes:'miniMinutes', seconds:'miniSeconds'}, miniEventDate);
-    }
-
-    // Run every second
-    updateCounters();
-    setInterval(updateCounters, 1000);
-
-    // Corazones flotando (solo si .app está visible)
-    function createHeart() {
-      if (!document.querySelector('.app') || getComputedStyle(document.querySelector('.app')).display === 'none') return;
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.innerText = '🤍';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.fontSize = (12 + Math.random()*18) + 'px';
-      heart.style.animationDuration = (4 + Math.random() * 4) + 's';
-      document.body.appendChild(heart);
-      setTimeout(()=> heart.remove(), 9000);
-    }
-    setInterval(createHeart, 700);
-
-    // Lógica preguntas
-    let stage = 1;
-    function answer(resp) {
-      const questionText = document.getElementById('questionText');
-      const box = document.getElementById('questionBox');
-      const finalMsg = document.getElementById('finalMessage');
-
-      if (resp === 'no' || resp === 'no soy') {
-        box.style.display = 'none';
-      } else if (resp === 'si' && stage === 1) {
-        stage = 2;
-        questionText.innerText = '¿En serio eres Mari?';
-      } else if (resp === 'si' && stage === 2) {
-        box.style.display = 'none';
-        finalMsg.style.display = 'block';
+      if (resp === 'si' && paso === 0) {
+        pregunta.innerHTML = '<p>¿En serio eres Mari?</p><button onclick="respuesta(\'si\')">Sí</button><button onclick="respuesta(\'no\')">No</button>';
+        paso = 1;
+      } else if (resp === 'si' && paso === 1) {
+        pregunta.style.display = 'none';
+        mensajeFinal.style.display = 'block';
+        crearEfecto();
+      } else if (resp === 'no') {
+        pregunta.style.display = 'none';
       }
     }
 
-    // Accessibility: remove heart generation on desktop to avoid surprises
-    if (window.matchMedia && window.matchMedia('(min-width:600px)').matches) {
-      // nothing - desktop sees the desktop message
+    // Efectos flotantes
+    function crearEfecto() {
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '🤍';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = 4 + Math.random() * 4 + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 8000);
+      }, 600);
+
+      const imgs = ['img1.jpg', 'img2.jpg'];
+      setInterval(() => {
+        const img = document.createElement('img');
+        img.src = imgs[Math.floor(Math.random() * imgs.length)];
+        img.classList.add('floating-img');
+        img.style.left = Math.random() * 100 + 'vw';
+        img.style.animationDuration = 6 + Math.random() * 5 + 's';
+        document.body.appendChild(img);
+        setTimeout(() => img.remove(), 10000);
+      }, 1500);
     }
   </script>
 </body>
