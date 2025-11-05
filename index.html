@@ -21,6 +21,7 @@
       justify-content: center;
       height: 100vh;
       text-align: center;
+      transition: all 0.3s ease;
     }
 
     .countdown {
@@ -89,9 +90,77 @@
       font-size: 1em;
       letter-spacing: 1px;
     }
+
+    /* ---- Ajuste para teléfonos ---- */
+    @media (min-width: 768px) {
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #002b5b;
+        color: white;
+        text-align: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+
+      .mobile-only {
+        display: block;
+      }
+
+      .countdown, .mini-countdown, footer, h3 {
+        display: none;
+      }
+
+      .mobile-only h2 {
+        font-size: 1.8em;
+        margin-bottom: 10px;
+      }
+
+      .mobile-only p {
+        font-size: 1em;
+        color: #f1c40f;
+      }
+    }
+
+    /* ---- Diseño para pantallas pequeñas ---- */
+    @media (max-width: 767px) {
+      .mobile-only {
+        display: none;
+      }
+
+      body {
+        padding: 20px;
+      }
+
+      .countdown {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .time-box {
+        padding: 15px 25px;
+      }
+
+      .mini-countdown {
+        flex-direction: column;
+        gap: 8px;
+        transform: scale(0.9);
+      }
+
+      footer {
+        bottom: 15px;
+        font-size: 1.2em;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="mobile-only">
+    <h2>Solo disponible en dispositivos móviles 📱</h2>
+    <p>Por favor, entra desde tu teléfono.</p>
+  </div>
+
   <div class="countdown" id="countdown">
     <div class="time-box">
       <div id="days">00</div>
@@ -131,7 +200,7 @@
     </div>
   </div>
 
-  <footer>Te amo </footer>
+  <footer>Te amo</footer>
 
   <script>
     // Contador principal (Mari llega el 23 de nov a las 5pm)
@@ -153,7 +222,7 @@
 
       if (distance < 0) {
         clearInterval(countdown);
-        document.getElementById('countdown').innerHTML = '<h2>¡Mari ya llegó! </h2>';
+        document.getElementById('countdown').innerHTML = '<h2>¡Mari ya llegó! 🤍</h2>';
       }
     }, 1000);
 
@@ -166,7 +235,7 @@
 
       if (distance < 0) {
         clearInterval(miniCountdown);
-        document.getElementById('miniCountdown').innerHTML = '<h2 style="color:#f1c40f;">UN DÍA!! </h2>';
+        document.getElementById('miniCountdown').innerHTML = '<h2 style="color:#f1c40f;">UN DÍA!!</h2>';
         return;
       }
 
