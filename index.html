@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mari 🤍</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #002b5b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .countdown {
+      display: flex;
+      gap: 25px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .time-box {
+      background: #fff8e1;
+      border: 2px solid #f1c40f;
+      border-radius: 15px;
+      padding: 25px 35px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .time-box div {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #002b5b;
+    }
+
+    .time-box span {
+      display: block;
+      margin-top: 5px;
+      font-size: 0.9em;
+      color: #a67c00;
+    }
+
+    /* Mini contador */
+    .mini-countdown {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+      transform: scale(0.75);
+      opacity: 0.85;
+    }
+
+    .mini-countdown .time-box {
+      padding: 15px 20px;
+      border: 1.5px solid #f1c40f;
+      box-shadow: 0 0 5px rgba(241,196,15,0.3);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 30px;
+      font-size: 1.4em;
+      font-weight: 600;
+      color: #002b5b;
+      text-shadow: 0 0 10px rgba(241, 196, 15, 0.6);
+      animation: glow 3s infinite ease-in-out;
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 10px rgba(241,196,15,0.4); color: #002b5b; }
+      50% { text-shadow: 0 0 20px rgba(241,196,15,0.8); color: #f1c40f; }
+      100% { text-shadow: 0 0 10px rgba(241,196,15,0.4); color: #002b5b; }
+    }
+
+    h3 {
+      margin-top: 10px;
+      color: #a67c00;
+      font-size: 1em;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="countdown" id="countdown">
+    <div class="time-box">
+      <div id="days">00</div>
+      <span>Días</span>
+    </div>
+    <div class="time-box">
+      <div id="hours">00</div>
+      <span>Horas</span>
+    </div>
+    <div class="time-box">
+      <div id="minutes">00</div>
+      <span>Minutos</span>
+    </div>
+    <div class="time-box">
+      <div id="seconds">00</div>
+      <span>Segundos</span>
+    </div>
+  </div>
+
+  <h3>22 de noviembre</h3>
+  <div class="mini-countdown" id="miniCountdown">
+    <div class="time-box">
+      <div id="miniDays">00</div>
+      <span>Días</span>
+    </div>
+    <div class="time-box">
+      <div id="miniHours">00</div>
+      <span>Horas</span>
+    </div>
+    <div class="time-box">
+      <div id="miniMinutes">00</div>
+      <span>Minutos</span>
+    </div>
+    <div class="time-box">
+      <div id="miniSeconds">00</div>
+      <span>Segundos</span>
+    </div>
+  </div>
+
+  <footer>Te amo </footer>
+
+  <script>
+    // Contador principal (Mari llega el 23 de nov a las 5pm)
+    const eventDate = new Date("2025-11-23T17:00:00-05:00").getTime();
+
+    const countdown = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').innerText = days.toString().padStart(2, '0');
+      document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+      document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+      document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+
+      if (distance < 0) {
+        clearInterval(countdown);
+        document.getElementById('countdown').innerHTML = '<h2>¡Mari ya llegó! </h2>';
+      }
+    }, 1000);
+
+    // Mini contador (para el 22 de noviembre)
+    const miniEventDate = new Date("2025-11-22T00:00:00-05:00").getTime();
+
+    const miniCountdown = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = miniEventDate - now;
+
+      if (distance < 0) {
+        clearInterval(miniCountdown);
+        document.getElementById('miniCountdown').innerHTML = '<h2 style="color:#f1c40f;">UN DÍA!! </h2>';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('miniDays').innerText = days.toString().padStart(2, '0');
+      document.getElementById('miniHours').innerText = hours.toString().padStart(2, '0');
+      document.getElementById('miniMinutes').innerText = minutes.toString().padStart(2, '0');
+      document.getElementById('miniSeconds').innerText = seconds.toString().padStart(2, '0');
+    }, 1000);
+  </script>
+</body>
+</html>
