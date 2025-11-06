@@ -5,177 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ojitos Dindos 🤍</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
 
     body {
-      background-color: #ffffff;
-      color: #002b5b;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      overflow: hidden;
-      text-align: center;
-      position: relative;
+      background-color: #ffffff; color: #002b5b; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; height: 100vh; overflow: hidden;
+      text-align: center; position: relative;
     }
 
-    h1 {
-      font-size: 1.6em;
-      color: #002b5b;
-      margin-bottom: 25px;
-    }
+    h1 { font-size: 1.6em; color: #002b5b; margin-bottom: 25px; }
 
-    .countdown {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
+    .countdown { display: flex; gap: 15px; justify-content: center; margin-bottom: 30px; flex-wrap: wrap; }
 
     .time-box {
-      background: #fff8e1;
-      border: 2px solid #f1c40f;
-      border-radius: 15px;
-      padding: 15px 25px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: #fff8e1; border: 2px solid #f1c40f; border-radius: 15px;
+      padding: 15px 25px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
-    .time-box div {
-      font-size: 2em;
-      font-weight: bold;
-      color: #002b5b;
-    }
+    .time-box div { font-size: 2em; font-weight: bold; color: #002b5b; }
+    .time-box span { display: block; margin-top: 5px; font-size: 0.9em; color: #a67c00; }
 
-    .time-box span {
-      display: block;
-      margin-top: 5px;
-      font-size: 0.9em;
-      color: #a67c00;
-    }
+    .mini-countdown { display: flex; gap: 10px; justify-content: center; transform: scale(0.8); opacity: 0.9; margin-top: 10px; }
+    .mini-countdown .time-box { padding: 10px 18px; border: 1.5px solid #f1c40f; }
 
-    /* Mini contador */
-    .mini-countdown {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      transform: scale(0.8);
-      opacity: 0.9;
-      margin-top: 10px;
-    }
-
-    .mini-countdown .time-box {
-      padding: 10px 18px;
-      border: 1.5px solid #f1c40f;
-    }
-
-    h3 {
-      color: #a67c00;
-      margin-bottom: 8px;
-      font-size: 1em;
-    }
+    h3 { color: #a67c00; margin-bottom: 8px; font-size: 1em; }
 
     footer {
-      position: absolute;
-      bottom: 25px;
-      font-size: 1.3em;
-      font-weight: 600;
-      color: #002b5b;
-      animation: glow 3s infinite ease-in-out;
-      text-align: center;
-      width: 100%;
+      position: absolute; bottom: 25px; font-size: 1.3em; font-weight: 600; color: #002b5b;
+      animation: glow 3s infinite ease-in-out; text-align: center; width: 100%;
     }
-
     @keyframes glow {
       0% { color: #002b5b; text-shadow: 0 0 8px rgba(241,196,15,0.4); }
       50% { color: #f1c40f; text-shadow: 0 0 15px rgba(241,196,15,0.8); }
       100% { color: #002b5b; text-shadow: 0 0 8px rgba(241,196,15,0.4); }
     }
 
-    /* Corazones flotando 🤍 */
-    .heart {
-      position: absolute;
-      color: #ffffff;
-      font-size: 18px;
-      opacity: 0.8;
-      animation: floatUp 6s linear infinite;
-    }
+    .heart { position: absolute; color: #ffffff; font-size: 18px; opacity: 0.8; animation: floatUp 6s linear infinite; }
+    @keyframes floatUp { 0% { transform: translateY(100vh) scale(1); opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
 
-    @keyframes floatUp {
-      0% { transform: translateY(100vh) scale(1); opacity: 0.8; }
-      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-    }
+    .floating-img { position: absolute; width: 90px; opacity: 0.85; animation: floatImg 8s linear infinite; z-index: 0; }
+    @keyframes floatImg { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0.9; } 100% { transform: translateY(-10vh) rotate(20deg); opacity: 0; } }
 
-    /* Imagen flotante */
-    .floating-img {
-      position: absolute;
-      width: 90px;
-      opacity: 0.85;
-      animation: floatImg 8s linear infinite;
-      z-index: 0;
-    }
-
-    @keyframes floatImg {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.9; }
-      100% { transform: translateY(-10vh) rotate(20deg); opacity: 0; }
-    }
-
-    /* Mensaje después del segundo sí */
     .mensaje-final {
-      font-size: 1.4em;
-      color: #002b5b;
-      text-shadow: 0 0 8px rgba(241,196,15,0.5);
-      margin-top: 25px;
-      display: none;
-      animation: fadeIn 2s ease-in forwards;
+      font-size: 1.4em; color: #002b5b; text-shadow: 0 0 8px rgba(241,196,15,0.5);
+      margin-top: 25px; display: none; animation: fadeIn 2s ease-in forwards;
     }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Preguntas */
-    .pregunta {
-      margin-top: 25px;
-      font-size: 1.1em;
-    }
+    .pregunta { margin-top: 25px; font-size: 1.1em; }
 
     button {
-      margin: 10px;
-      padding: 8px 15px;
-      font-size: 1em;
-      border: none;
-      border-radius: 10px;
-      background-color: #f1c40f;
-      color: #002b5b;
-      cursor: pointer;
-      transition: all 0.3s;
+      margin: 10px; padding: 8px 15px; font-size: 1em; border: none; border-radius: 10px;
+      background-color: #f1c40f; color: #002b5b; cursor: pointer; transition: all 0.3s;
     }
+    button:hover { background-color: #002b5b; color: #fff8e1; }
 
-    button:hover {
-      background-color: #002b5b;
-      color: #fff8e1;
+    .input-wrap { margin-top: 15px; display: flex; gap: 10px; justify-content: center; align-items: center; }
+    input[type="text"] {
+      padding: 10px 12px; border-radius: 10px; border: 2px solid #f1c40f; width: 220px; outline: none;
+      background: #fff8e1; color: #002b5b; font-size: 1em;
     }
+    .error { color: #b00020; margin-top: 8px; font-size: 0.95em; min-height: 1.2em; }
 
-    /* Ocultar en PC */
     @media (min-width: 600px) {
-      body > *:not(.soloMovil) {
-        display: none;
-      }
+      body > *:not(.soloMovil) { display: none; }
       body::after {
         content: "💻 Esta página solo está hecha para ver desde un celular 💖";
-        color: #002b5b;
-        font-size: 1.4em;
-        text-align: center;
-        display: block;
-        margin-top: 40vh;
+        color: #002b5b; font-size: 1.4em; text-align: center; display: block; margin-top: 40vh;
       }
     }
   </style>
@@ -210,18 +106,21 @@
     <footer>Te amo 🤍</footer>
   </div>
 
+  <!-- AUDIO: reemplaza src con tu archivo MP3 de “Tus vueltas – Milo J” -->
+  <audio id="song" src="tus-vueltas-miloj.mp3" preload="auto"></audio>
+
   <script>
-    // Contadores
+    // ===== Contadores =====
     const eventDate = new Date("2025-11-23T17:00:00-05:00").getTime();
     const miniEventDate = new Date("2025-11-22T17:00:00-05:00").getTime();
 
     setInterval(() => {
-      const now = new Date().getTime();
+      const now = Date.now();
       const updateCountdown = (distance, ids) => {
-        const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((distance % (1000 * 60)) / 1000);
+        const d = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
+        const h = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+        const m = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+        const s = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000));
         document.getElementById(ids[0]).innerText = d.toString().padStart(2, '0');
         document.getElementById(ids[1]).innerText = h.toString().padStart(2, '0');
         document.getElementById(ids[2]).innerText = m.toString().padStart(2, '0');
@@ -231,25 +130,68 @@
       updateCountdown(miniEventDate - now, ['miniDays','miniHours','miniMinutes','miniSeconds']);
     }, 1000);
 
-    // Preguntas interactivas
+    // ===== Flujo de preguntas =====
     let paso = 0;
+
     function respuesta(resp) {
       const pregunta = document.getElementById('pregunta');
       const mensajeFinal = document.getElementById('mensajeFinal');
 
       if (resp === 'si' && paso === 0) {
-        pregunta.innerHTML = '<p>¿En serio eres Mari?</p><button onclick="respuesta(\'si\')">Sí</button><button onclick="respuesta(\'no\')">No</button>';
+        pregunta.innerHTML = '<p>¿En serio eres Mari?</p><button onclick="respuesta(\\'si\\')">Sí</button><button onclick="respuesta(\\'no\\')">No</button>';
         paso = 1;
       } else if (resp === 'si' && paso === 1) {
-        pregunta.style.display = 'none';
-        mensajeFinal.style.display = 'block';
-        crearEfecto();
+        // TERCER PASO: campo en blanco
+        mostrarPreguntaClave();
+        paso = 2;
       } else if (resp === 'no') {
         pregunta.style.display = 'none';
       }
     }
 
-    // Efectos flotantes
+    function mostrarPreguntaClave() {
+      const pregunta = document.getElementById('pregunta');
+      pregunta.innerHTML = `
+        <p>Escribe la fecha clave 💛</p>
+        <div class="input-wrap">
+          <input type="text" id="respuestaLibre" placeholder="Ej: 15 de mayo" autocomplete="off" />
+          <button id="btnValidar">Enviar</button>
+        </div>
+        <div class="error" id="errorMsg"></div>
+      `;
+      document.getElementById('btnValidar').addEventListener('click', validarClave);
+      document.getElementById('respuestaLibre').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') validarClave();
+      });
+    }
+
+    // Normaliza texto: minúsculas, trim y quita acentos
+    function normalizar(txt) {
+      return txt
+        .toLowerCase()
+        .normalize('NFD').replace(/\\p{Diacritic}/gu, '')
+        .replace(/\\s+/g, ' ')
+        .trim();
+    }
+
+    function validarClave() {
+      const input = document.getElementById('respuestaLibre');
+      const error = document.getElementById('errorMsg');
+      const valor = normalizar(input.value);
+
+      if (valor === '15 de mayo') {
+        // Éxito: ocultar pregunta, mostrar mensaje y efectos, reproducir canción
+        document.getElementById('pregunta').style.display = 'none';
+        document.getElementById('mensajeFinal').style.display = 'block';
+        crearEfecto();
+        reproducirCancion();
+      } else {
+        error.textContent = 'Mmm… no es esa fecha. Intenta de nuevo 💫';
+        input.focus();
+      }
+    }
+
+    // ===== Efectos flotantes =====
     function crearEfecto() {
       setInterval(() => {
         const heart = document.createElement('div');
@@ -271,6 +213,26 @@
         document.body.appendChild(img);
         setTimeout(() => img.remove(), 10000);
       }, 1500);
+    }
+
+    // ===== Audio =====
+    function reproducirCancion() {
+      const audio = document.getElementById('song');
+      audio.volume = 1.0;
+      // Reproducir tras interacción del usuario (botón/enter) — compatible con móviles
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Si falla por política del navegador, mostramos un botón rápido
+          const btn = document.createElement('button');
+          btn.textContent = '▶️ Reproducir canción';
+          btn.style.position = 'absolute';
+          btn.style.top = '15px';
+          btn.style.right = '15px';
+          btn.onclick = () => { audio.play(); btn.remove(); };
+          document.body.appendChild(btn);
+        });
+      }
     }
   </script>
 </body>
